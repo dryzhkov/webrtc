@@ -2,6 +2,7 @@ if (!location.hash) {
     location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 let pc;
+let drone;
 const onSuccess = (msg) => { console.log(msg) };
 const onError = (error) => {
     console.error(error);
@@ -46,6 +47,8 @@ const startSignalingServer = (roomName) => {
             startListentingToSignals(room, drone);
         });
     });
+
+    return drone;
 }
 
 const startWebRTC = (isOfferer) => {
@@ -114,4 +117,4 @@ const localDescCreated = (desc) => {
     );
 }
 
-startSignalingServer(roomName);
+drone = startSignalingServer(roomName);
